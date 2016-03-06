@@ -1,0 +1,6 @@
+main: com.nomic.Levels.Main
+version: 3.0.0
+name: Levels
+commands:
+  levels:
+    description: Main plugin command.

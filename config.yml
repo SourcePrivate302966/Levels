@@ -1,0 +1,132 @@
+# Levels by Nomic
+# Set amount of experience to give from sources.
+# Set experience multiplier.
+# Do not set min & max values to same value (exception is zero).
+# Setting min & max values to zero will disable exp source.
+# Min value must be above '0' and max value must be above '1'.
+# To set constant value, double max (ex: min = 2, max = 4, will give 2 exp).
+expBottleGiveMin: 3
+expBottleGiveMax: 11
+expMultiplier: 1
+mobExp:
+  bat:
+    min: 0
+    max: 0
+  blaze:
+    min: 10
+    max: 20
+  caveSpider:
+    min: 5
+    max: 10
+  chicken:
+    min: 1
+    max: 3
+  cow:
+    min: 1
+    max: 3
+  creeper:
+    min: 5
+    max: 10
+  enderDragon:
+    min: 12000
+    max: 24000
+  enderman:
+    min: 5
+    max: 10
+  endermite:
+    min: 3
+    max: 6
+  ghast:
+    min: 5
+    max: 10
+  giant:
+    min: 0
+    max: 0
+  guardian: 
+    min: 10
+    max: 20
+  horse:
+    min: 1
+    max: 3
+  ironGolem:
+    min: 0
+    max: 0
+  magmaCube:
+    min: 5
+    max: 10
+  mushroomCow:
+    min: 1
+    max: 3
+  ocelot:
+    min: 1
+    max: 3
+  pig:
+    min: 1
+    max: 3
+  pigZombie:
+    min: 5
+    max: 10
+  rabbit:
+    min: 1
+    max: 3
+  sheep:
+    min: 1
+    max: 3
+  silverfish:
+    min: 5
+    max: 10
+  skeleton:
+    min: 5
+    max: 10
+  slime:
+    min: 2
+    max: 3
+  spider:
+    min: 5
+    max: 10
+  squid:
+    min: 1
+    max: 3
+  villager:
+    min: 0
+    max: 0
+  witch:
+    min: 5
+    max: 10
+  wither:
+    min: 50
+    max: 100
+  wolf:
+    min: 1
+    max: 3
+  zombie:
+    min: 5
+    max: 10
+blockExp:
+  coalOre:
+    min: 1
+    max: 2
+  diamondOre:
+    min: 3
+    max: 7
+  emeraldOre:
+    min: 3
+    max: 7
+  lapisOre:
+    min: 2
+    max: 5
+  redstoneOre:
+    min: 1
+    max: 5
+  quartzOre:
+    min: 2
+    max: 5
+  ironOre:
+    min: 0
+    max: 0
+  goldOre:
+    min: 0
+    max: 0
+  mobSpawner:
+    min: 15
+    max: 4

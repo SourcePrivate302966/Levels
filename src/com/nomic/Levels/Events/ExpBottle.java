@@ -36,13 +36,10 @@ public class ExpBottle implements Listener {
 			if ((min > 0) && (max > 1) && (min != max)) {
 				if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
-					p.sendMessage("give2");
 				} else if (p.hasPermission(tri)) {
 					p.giveExp(3 * give);
-					p.sendMessage("give3");
 				} else {
 					p.giveExp(give);
-					p.sendMessage("give");
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {

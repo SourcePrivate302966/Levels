@@ -1,9 +1,9 @@
 package com.nomic.Levels;
 
-import com.nomic.Levels.Events.Block;
+import com.nomic.Levels.Events.BlockBreak;
 import com.nomic.Levels.Events.Cmd;
 import com.nomic.Levels.Events.ExpBottle;
-import com.nomic.Levels.Events.Mob;
+import com.nomic.Levels.Events.KillMob;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,8 +19,8 @@ public class Main extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 
 		pm.registerEvents(new ExpBottle(this), this);
-		pm.registerEvents(new Mob(this), this);
-		pm.registerEvents(new Block(this), this);
+		pm.registerEvents(new KillMob(this), this);
+		pm.registerEvents(new BlockBreak(this), this);
 	}
 
 	public void registerCommands() {

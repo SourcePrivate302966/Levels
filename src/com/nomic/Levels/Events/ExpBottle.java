@@ -14,6 +14,9 @@ public class ExpBottle implements Listener {
 	public ExpBottle(Main pl) {
 		plugin = pl;
 	}
+	
+	String dub = "levels.double";
+	String tri = "levels.triple";
 
 	@EventHandler
 	public void onEvent(ProjectileLaunchEvent e) {
@@ -28,11 +31,9 @@ public class ExpBottle implements Listener {
 		int min = plugin.getConfig().getInt("expBottleGiveMin");
 		int max = plugin.getConfig().getInt("expBottleGiveMax");
 		int mult = plugin.getConfig().getInt("expMultiplier");
-		if ((p.hasPermission("levels.expbottle")) || (p.isOp())) {
-			int chance = new Random().nextInt(max);
-			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+		int chance = new Random().nextInt(max);
+		int give = mult * min + new Random().nextInt(mult * (max - min));
+		if ((p.hasPermission("levels.expbottle"))) {
 			if ((min > 0) && (max > 1) && (min != max)) {
 				if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);

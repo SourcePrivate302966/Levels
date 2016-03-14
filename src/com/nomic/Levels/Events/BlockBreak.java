@@ -9,32 +9,40 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
-public class Block implements Listener {
+public class BlockBreak implements Listener {
 
 	private Main plugin;
-	public Block(Main pl) {
+	public BlockBreak(Main pl) {
 		plugin = pl;
 	}
+	
+	ConfigurationSection config = plugin.getConfig().getConfigurationSection("blockExp");
+	int mult = plugin.getConfig().getInt("expMultiplier");
+	String dub = "levels.double";
+	String tri = "levels.triple";
+	String perm = "levels.block";
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		Material b = e.getBlock().getType();
 		Player p = e.getPlayer();
-		if (!p.hasPermission("levels.block")) {
+		if (p.hasPermission("levels.block.deny.*")) {
+			e.setExpToDrop(0);
 			return;
 		}
-		ConfigurationSection config = plugin.getConfig().getConfigurationSection("blockExp");
-		int mult = plugin.getConfig().getInt("expMultiplier");
 		if (b == Material.COAL_ORE) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("coalOre").getInt("min");
 			int max = config.getConfigurationSection("coalOre").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.coalore")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -43,7 +51,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -52,7 +62,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -61,15 +73,18 @@ public class Block implements Listener {
 				}
 			}
 		} else if (b == Material.DIAMOND_ORE) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("diamondOre").getInt("min");
 			int max = config.getConfigurationSection("diamondOre").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.diamondore")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -78,7 +93,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -87,7 +104,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -96,15 +115,18 @@ public class Block implements Listener {
 				}
 			}
 		} else if (b == Material.EMERALD_ORE) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("emeraldOre").getInt("min");
 			int max = config.getConfigurationSection("emeraldOre").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.emeraldore")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -113,7 +135,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -122,7 +146,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -131,15 +157,18 @@ public class Block implements Listener {
 				}
 			}
 		} else if (b == Material.LAPIS_ORE) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("lapisOre").getInt("min");
 			int max = config.getConfigurationSection("lapisOre").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.lapisore")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -148,7 +177,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -157,7 +188,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -166,15 +199,18 @@ public class Block implements Listener {
 				}
 			}
 		} else if (b == Material.REDSTONE_ORE) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("redstoneOre").getInt("min");
 			int max = config.getConfigurationSection("redstoneOre").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.redstoneore")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -183,7 +219,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -192,7 +230,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -201,15 +241,18 @@ public class Block implements Listener {
 				}
 			}
 		} else if (b == Material.QUARTZ_ORE) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("quartzOre").getInt("min");
 			int max = config.getConfigurationSection("quartzOre").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.quartzore")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -218,7 +261,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -227,7 +272,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -236,15 +283,18 @@ public class Block implements Listener {
 				}
 			}
 		} else if (b == Material.IRON_ORE) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("ironOre").getInt("min");
 			int max = config.getConfigurationSection("ironOre").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.ironore")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -253,7 +303,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -262,7 +314,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -271,15 +325,18 @@ public class Block implements Listener {
 				}
 			}
 		} else if (b == Material.GOLD_ORE) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("goldOre").getInt("min");
 			int max = config.getConfigurationSection("goldOre").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.goldore")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -288,7 +345,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -297,7 +356,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -306,15 +367,18 @@ public class Block implements Listener {
 				}
 			}
 		} else if (b == Material.MOB_SPAWNER) {
-			e.setExpToDrop(0);
 			int min = config.getConfigurationSection("mobSpawner").getInt("min");
 			int max = config.getConfigurationSection("mobSpawner").getInt("max");
 			int chance = new Random().nextInt(max);
 			int give = mult * min + new Random().nextInt(mult * (max - min));
-			String dub = "levels.double";
-			String tri = "levels.triple";
+			if (p.hasPermission("levels.block.deny.mobspawner")) {
+				e.setExpToDrop(0);
+				return;
+			}
 			if ((min > 0) && (max > 1) && (min != max)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);
@@ -323,7 +387,9 @@ public class Block implements Listener {
 				}
 			} else if ((min == 0) && (max > 1)) {
 				if (chance == 1) {
-					if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+					if (!p.hasPermission(perm)) {
+						e.setExpToDrop(give);
+					} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 						p.giveExp(give);
 					} else if (p.hasPermission(dub)) {
 						p.giveExp(2 * give);
@@ -332,7 +398,9 @@ public class Block implements Listener {
 					}
 				}
 			} else if ((min == 0) && (max == 1) && (chance > 0)) {
-				if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
+				if (!p.hasPermission(perm)) {
+					e.setExpToDrop(give);
+				} else if ((!p.hasPermission(dub)) && (!p.hasPermission(tri))) {
 					p.giveExp(give);
 				} else if (p.hasPermission(dub)) {
 					p.giveExp(2 * give);

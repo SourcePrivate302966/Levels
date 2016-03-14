@@ -17,8 +17,6 @@ public class KillMob implements Listener {
 		plugin = pl;
 	}
 	
-	ConfigurationSection config = plugin.getConfig().getConfigurationSection("mobExp");
-	int mult = plugin.getConfig().getInt("expMultiplier");
 	String dub = "levels.double";
 	String tri = "levels.triple";
 	String perm = "levels.mob";
@@ -27,6 +25,8 @@ public class KillMob implements Listener {
 	public void onKill(EntityDeathEvent e) {
 		Player p = e.getEntity().getKiller();
 		EntityType mob = e.getEntity().getType();
+		ConfigurationSection config = plugin.getConfig().getConfigurationSection("mobExp");
+		int mult = plugin.getConfig().getInt("expMultiplier");
 		if (!(p instanceof Player)) {
 			return;
 		}

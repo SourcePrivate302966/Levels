@@ -16,8 +16,6 @@ public class BlockBreak implements Listener {
 		plugin = pl;
 	}
 	
-	ConfigurationSection config = plugin.getConfig().getConfigurationSection("blockExp");
-	int mult = plugin.getConfig().getInt("expMultiplier");
 	String dub = "levels.double";
 	String tri = "levels.triple";
 	String perm = "levels.block";
@@ -26,6 +24,8 @@ public class BlockBreak implements Listener {
 	public void onBlockBreak(BlockBreakEvent e) {
 		Material b = e.getBlock().getType();
 		Player p = e.getPlayer();
+		ConfigurationSection config = plugin.getConfig().getConfigurationSection("blockExp");
+		int mult = plugin.getConfig().getInt("expMultiplier");
 		if (p.hasPermission("levels.block.deny.*")) {
 			e.setExpToDrop(0);
 			return;

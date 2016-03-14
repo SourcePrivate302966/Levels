@@ -33,6 +33,9 @@ public class ExpBottle implements Listener {
 		int mult = plugin.getConfig().getInt("expMultiplier");
 		int chance = new Random().nextInt(max);
 		int give = mult * min + new Random().nextInt(mult * (max - min));
+		if (p.hasPermission("levels.expbottle.deny")) {
+			e.setCancelled(true);
+		}
 		if ((p.hasPermission("levels.expbottle"))) {
 			if ((min > 0) && (max > 1) && (min != max)) {
 				if (p.hasPermission(dub)) {

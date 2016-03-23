@@ -4,6 +4,8 @@ import com.nomic.Levels.Events.BlockBreak;
 import com.nomic.Levels.Events.Cmd;
 import com.nomic.Levels.Events.ExpBottle;
 import com.nomic.Levels.Events.KillMob;
+import com.nomic.Levels.Events.MaxLevel;
+
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,6 +23,7 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new ExpBottle(this), this);
 		pm.registerEvents(new KillMob(this), this);
 		pm.registerEvents(new BlockBreak(this), this);
+		pm.registerEvents(new MaxLevel(this), this);
 	}
 
 	public void registerCommands() {

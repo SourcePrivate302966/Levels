@@ -5,9 +5,12 @@
 # Setting min & max values to zero will disable exp source.
 # Min value must be above '0' and max value must be above '1'.
 # To set constant value, double max (ex: min = 2, max = 4, will give 2 exp).
+# Set maxLevel to '0' to disable it, and maxLevelMessage to none to disable it.
 expBottleGiveMin: 3
 expBottleGiveMax: 11
 expMultiplier: 1
+maxLevel: 100
+maxLevelMessage: '&eMax level is &a100&e.'
 mobExp:
   bat:
     min: 0
